@@ -14,25 +14,21 @@ $pessoa = new People(
     filter_input(INPUT_POST, "gen", FILTER_SANITIZE_STRING),
     filter_input(INPUT_POST, "state", FILTER_SANITIZE_STRING)
   );
-// var_dump($pessoa);
-  if((new UserController())->create($pessoa)){
-    $result = "<div class='alert bg-green'>Pessoa Cadastrada</div>";
-  }else{
-    $result = "<div class='alert bg-red'>Erro ao Cadastrada</div>";
-  }
 
+if((new UserController())->create($pessoa)){
+  $result = '<div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Cadastro Realizado Com Sucesso</strong>
+            </div>';
+     }else{
+      $result =  "error";
+}
 ?>
 
 <body>
 <form method="post">
   <fieldset>
     <legend>New People</legend>
-    <div class="form-group row">
-      <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-      <div class="col-sm-10">
-        <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="email@example.com">
-      </div>
-    </div>
     <div class="form-group">
       <label for="exampleInputEmail1">Email </label>
       <input type="email" class="form-control" id="txtEmail" name="txtEmail" aria-describedby="emailHelp" placeholder="Enter email">
@@ -63,4 +59,7 @@ $pessoa = new People(
       <button type="submit" class="btn btn-primary">Create People</button>
     </div>
     </form>
+    <div>
+      <?= $result; ?>
+    </div>
 </body>

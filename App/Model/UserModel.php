@@ -42,7 +42,7 @@ class UserModel
     public function update(People $people)
     {
         try {
-            $sql = "UPDATE pessoa SET nome = :nome, email = :email, gen = :gen, estado = :staestadoe WHERE id = :id";
+            $sql = "UPDATE user SET nome = :nome, email = :email, gen = :gen, estado = :estado WHERE id = :id";
             $params = [
                 ":id"     => $people->getId(),
                 ":nome"   => $people->getName(),
@@ -88,19 +88,15 @@ class UserModel
 
             $sql = "SELECT nome,email,gen,estado  FROM user WHERE id = :id ORDER BY nome ASC";
             $param = ["id" => $peopleId];
-            $results = $this->pdo->ExecuteQueryOneRow($sql, $param);
-
-            $list = [];
-            foreach($results as $result){
-                $list[] = new People(
+            $result = $this->pdo->ExecuteQueryOneRow($sql, $param);
+                return new People(
                     $peopleId,
                     $result["nome"],
                     $result["email"],
                     $result["gen"],
                     $result["estado"]
                 );
-            }
-            return $list;
+
         } catch (\Throwable $ex) {
             echo "ERRO: {$ex->getMessage()}";
             return false;

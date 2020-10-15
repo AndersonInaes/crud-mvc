@@ -32,10 +32,10 @@ $list = $lists->getAll();
       <td><?=$people->getGen() == "F" ? "Feminino" : "Masculino"; ?></td>
       <td><?=$people->getState(); ?></td>
       <td>
-        <a href="update.php?id=<?=$people->getId();?>" class="btn bg-blue">Editar</a>
+        <a href="App/View/User/update.php?id=<?=$people->getId();?>" class="btn bg-blue">Editar</a>
       </td>
       <td>
-        <a href="App/Model/Delete.php?id=<?=$people->getId();?>" class="btn bg-red" onclick="return confirm('Deseja remover?')">Remover</a>
+        <a href="App/View/User/delete.php?id=<?=$people->getId();?>" class="btn bg-red" onclick="return confirm('Deseja remover?')">Remover</a>
       </td>
     </tr>
     <?php } ?>

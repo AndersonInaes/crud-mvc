@@ -15,17 +15,14 @@ $pessoa = new People(
     filter_input(INPUT_POST, "state", FILTER_SANITIZE_STRING)
   );
 
-  
-$c = new UserController();
-$c->create($pessoa);
-
-if(isset($_POST['submit']))
-  if($c){
-    $result = "ok";
-  }else{
-    $result = "Nao ok";
-  }
-
+if((new UserController())->create($pessoa)){
+  $result = '<div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Cadastro Realizado Com Sucesso</strong>
+            </div>';
+     }else{
+      $result =  "error";
+}
 ?>
 
 <body>
@@ -59,10 +56,10 @@ if(isset($_POST['submit']))
       </select>
     </div>
     <div class="btn-group-vertical">
-      <input type="submit" name="submit" value="Cadastra" class="btn btn-primary"/>
+      <button type="submit" class="btn btn-primary">Create People</button>
     </div>
     </form>
-    <div class="message">
+    <div>
       <?= $result; ?>
     </div>
 </body>

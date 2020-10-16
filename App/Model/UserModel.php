@@ -1,6 +1,6 @@
 <?php
 namespace App\model;
-session_start();
+
 require __DIR__ . '../../../vendor/autoload.php';
 
 use App\Entity\People;
@@ -29,9 +29,12 @@ class UserModel
                 ":estado" => $people->getState()
             ];
 
-            $this->pdo->ExecuteNonQuery($sql, $params);
-       
-            
+            $r =  $this->pdo->ExecuteNonQuery($sql, $params);
+
+            if ($r > 0)
+                return $this->pdo->GetLastId();
+            else
+                return -1;
         } catch (\Throwable $th) {
             echo "Erro" . $th->getMessage();
         }

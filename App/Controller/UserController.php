@@ -18,6 +18,9 @@ class UserController
     {
          if (strlen($people->getName()) < 3 || strlen($people->getName() > 100))
              return false;
+
+        //  if (strlen($people->getEmail() < 5))
+        //      return false;
         
         if($people->getGen() != "F")
         if($people->getGen() != "M")
@@ -27,7 +30,6 @@ class UserController
         return false;
 
         $this->userModel->create($people);
-        
       }
 
     public function update(People $people)
@@ -42,11 +44,11 @@ class UserController
         return false;
       
       if($people->getGen() != "F")
-      if($people->getGen() != "M")
+        if($people->getGen() != "M")
           return false;
       
-      if(strlen($people->getState()) < 2)
-          return false;
+      if(strlen($people->getState()) != 2)
+        return false;
       
       return $this->userModel->update($people);
     }

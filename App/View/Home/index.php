@@ -1,13 +1,12 @@
 <?php
-
 include_once './App/Controller/UserController.php';
 require __DIR__ . '/../../../vendor/autoload.php';
 
 use App\Conrtoller\UserController;
 $lists = new UserController();
 $list = $lists->getAll();
+?>
 
-    ?>
 <table class="table table-hover">
   <thead>
     <tr>

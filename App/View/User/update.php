@@ -1,16 +1,16 @@
 <?php
 require_once __DIR__ . "/../../../vendor/autoload.php";
 require_once __DIR__ . "../../../Controller/UserController.php";
-use App\conrtoller\UserController as ConrtollerUserController;
+use App\conrtoller\UserController as UserController;
 use App\Entity\People;
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-$pessoaController = new ConrtollerUserController();
+$pessoaController = new UserController();
 $pessoa = $pessoaController->getById($id);
 
 $result = "";
 
-if(filter_input(INPUT_POST, "txtNome")){
+if(filter_input(INPUT_POST, "txtName")){
   $pessoa = new People(
     filter_input(INPUT_POST, "txtId", FILTER_SANITIZE_NUMBER_INT),
     filter_input(INPUT_POST, "txtName", FILTER_SANITIZE_STRING),
@@ -18,8 +18,10 @@ if(filter_input(INPUT_POST, "txtNome")){
     filter_input(INPUT_POST, "gen", FILTER_SANITIZE_STRING),
     filter_input(INPUT_POST, "state", FILTER_SANITIZE_STRING)
   );
-
-  if((new ConrtollerUserController())->update($pessoa)){
+  $u = new UserController();
+  $u->update($pessoa);
+  
+  if($u){
     $result = "<div class='alert bg-green'>Pessoa Alterada</div>";
   }else{
     $result = "<div class='alert bg-red'>Erro ao alterar</div>";
@@ -68,11 +70,12 @@ if(filter_input(INPUT_POST, "txtNome")){
     </div>
 
     <div class="btn-group-vertical">
-      <button type="submit" class="btn btn-primary">Atualizar</button>
+      <input type="submit" class="btn btn-primary" value="Atualizar"/>
     </div>
-    <a href="../../../">Atualizar</button>
-          <?=$result;?>
+    <a href="../../../" class="btn btn-primary">Voltar</a>
       </form>
-    </main> 
+      <?=$result;?>
+
+  </main> 
 </body>
     </html>

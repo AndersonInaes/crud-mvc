@@ -29,12 +29,7 @@ class UserModel
                 ":estado" => $people->getState()
             ];
 
-            $r =  $this->pdo->ExecuteNonQuery($sql, $params);
-
-            if ($r > 0)
-                return $this->pdo->GetLastId();
-            else
-                return -1;
+             $this->pdo->ExecuteNonQuery($sql, $params);
         } catch (\Throwable $th) {
             echo "Erro" . $th->getMessage();
         }

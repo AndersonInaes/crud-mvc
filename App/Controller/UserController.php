@@ -19,14 +19,15 @@ class UserController
          if (strlen($people->getName()) < 3 || strlen($people->getName() > 100))
              return false;
 
-        //  if (strlen($people->getEmail() < 5))
-        //      return false;
+         if (strlen($people->getEmail() < 3) && empty($people->getEmail()))
+             return false;
+        
         
         if($people->getGen() != "F")
         if($people->getGen() != "M")
         return false;
 
-        if(strlen($people->getState() > 2))
+        if(empty($people->getState()))
         return false;
 
         $this->userModel->create($people);
@@ -35,19 +36,16 @@ class UserController
     public function update(People $people)
     {
       if($people->getId() < 1)
-       return false;
+        return false;
 
       if(strlen($people->getName()) < 3 || strlen($people->getName()) > 100)
         return false;
-      
-      if(strlen($people->getEmail()) < 5)
-        return false;
-      
+           
       if($people->getGen() != "F")
-        if($people->getGen() != "M")
+      if($people->getGen() != "M")
           return false;
       
-      if(strlen($people->getState()) != 2)
+      if(empty($people->getState()))
         return false;
       
       return $this->userModel->update($people);

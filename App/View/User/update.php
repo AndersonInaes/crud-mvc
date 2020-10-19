@@ -1,16 +1,17 @@
 <?php
 require_once __DIR__ . "/../../../vendor/autoload.php";
 require_once __DIR__ . "../../../Controller/UserController.php";
-use App\conrtoller\UserController as ConrtollerUserController;
+
+use App\conrtoller\UserController as UserController;
 use App\Entity\People;
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
-$pessoaController = new ConrtollerUserController();
+$pessoaController = new UserController();
 $pessoa = $pessoaController->getById($id);
 
 $result = "";
 
-if(filter_input(INPUT_POST, "txtNome")){
+if(filter_input(INPUT_POST, "txtName")){
   $pessoa = new People(
     filter_input(INPUT_POST, "txtId", FILTER_SANITIZE_NUMBER_INT),
     filter_input(INPUT_POST, "txtName", FILTER_SANITIZE_STRING),
@@ -19,10 +20,16 @@ if(filter_input(INPUT_POST, "txtNome")){
     filter_input(INPUT_POST, "state", FILTER_SANITIZE_STRING)
   );
 
-  if((new ConrtollerUserController())->update($pessoa)){
-    $result = "<div class='alert bg-green'>Pessoa Alterada</div>";
-  }else{
-    $result = "<div class='alert bg-red'>Erro ao alterar</div>";
+  if((new UserController())->update($pessoa)){
+    $result = '<div class="alert alert-dismissible alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Registration changed Successfully</strong>
+    </div>';
+     }else{
+      $result = '<div class="alert alert-dismissible alert-danger">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Error Changing the Registration.</strong>.
+    </div>';
   }
 }
 ?>
@@ -59,6 +66,7 @@ if(filter_input(INPUT_POST, "txtNome")){
     <div class="form-group">
       <label for="state">Select State</label>
       <select class="form-control" id="state" name="state">
+        <option value="">...</option>
         <option value="Rio Grande Do Sul">RS</option>
         <option value="Sao Paulo">SP</option>
         <option value="Rio de Janeiro">RJ</option>
@@ -68,9 +76,9 @@ if(filter_input(INPUT_POST, "txtNome")){
     </div>
 
     <div class="btn-group-vertical">
-      <button type="submit" class="btn btn-primary">Atualizar</button>
+      <button name="submit" type="submit" class="btn btn-primary">Atualizar</button>
     </div>
-    <a href="../../../">Atualizar</button>
+    <a href="../../../">Voltar</a>
           <?=$result;?>
       </form>
     </main> 

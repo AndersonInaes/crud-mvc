@@ -18,19 +18,19 @@
   <div class="collapse navbar-collapse" id="navbarColor02">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="?u=index">Home</a>
+        <a class="nav-link" href="?index">Home</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="?u=create">Create</a>
+        <a class="nav-link" href="?create">Create</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="?u=contato">Contact</a>
+        <a class="nav-link" href="?contato">Contact</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="?u=quemsomos">Are</a>
+        <a class="nav-link" href="?quemsomos">Are</a>
       </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0" action="App/View/User/find.php" method="GET">
       <input class="form-control mr-sm-2" type="text" placeholder="Search">
       <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
     </form>
